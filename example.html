@@ -1,0 +1,29 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ </head>
+ <body>
+     <button id="eyedropperButton">Open eyedropper</button>
+     <script>
+    // Create an EyeDropper object
+    let eyeDropper = new EyeDropper();
+
+    document.getElementById("eyedropperButton").addEventListener('click', e => {
+        // Enter eyedropper mode
+        eyeDropper.open()
+        .then(colorSelectionResult => {
+            // returns hex color value (#RRGGBB) of the selected pixel
+            console.log(colorSelectionResult.sRGBHex);
+        })
+        .catch(error => {
+            // handle the user choosing to exit eyedropper mode without a selection
+        });
+    });
+  </script>
+ </body>
+ </html>
+
+  
