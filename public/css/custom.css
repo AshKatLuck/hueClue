@@ -1,0 +1,43 @@
+.showColor {
+  width: 500px;
+  height: 500px;
+  background-color: aliceblue;
+  color: blue;
+}
+
+#divColor1,
+#divColor2 {
+  width: 50px;
+  height: 50px;
+  border: 2px solid black;
+}
+
+/* #divCompare {
+  width: 200px;
+  height: 200px;
+  background-color: antiquewhite;
+} */
+
+#output {
+  position: relative;
+}
+#under {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 500px;
+  height: 20px;
+  border: 2px solid black;
+  background-color: blue;
+}
+#over {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  max-width: 500px;
+  width: 250px;
+  height: 20px;
+  border: 2px solid black;
+  background-color: blueviolet;
+  transition: all 0.5s ease-in;
+}
