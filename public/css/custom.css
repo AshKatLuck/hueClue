@@ -5,20 +5,13 @@
   color: blue;
 }
 
-#divColor1,
-#divColor2 {
-  width: 50px;
-  height: 50px;
-  border: 2px solid black;
-}
-
 /* #divCompare {
   width: 200px;
   height: 200px;
   background-color: antiquewhite;
 } */
 
-#output {
+/* #output {
   position: relative;
 }
 #under {
@@ -40,4 +33,63 @@
   border: 2px solid black;
   background-color: blueviolet;
   transition: all 0.5s ease-in;
+} */
+/* newly added classes in test.html */
+.picked-color,
+#showColorDiv {
+  background-color: beige;
+  color: darkmagenta;
+  border-radius: 10px;
+  height: 100px;
+}
+#color-rgb-display {
+  background-color: bisque;
+  height: 6rem;
+  border-radius: 10px;
+  text-align: center;
+  color: white;
+  font-size: large;
+}
+#R {
+  background-color: red;
+  border-radius: 10px 0 0 10px;
+  height: 100%;
+  opacity: 70%;
+}
+#G {
+  background-color: green;
+  height: 100%;
+  opacity: 70%;
+}
+#B {
+  background-color: blue;
+  opacity: 70%;
+  height: 100%;
+  border-radius: 0 10px 10px 0;
+}
+
+#divColor1,
+#divColor2 {
+  height: 100px;
+  background-color: beige;
+  color: darkmagenta;
+}
+
+#divColor1 {
+  border-radius: 10px 0 0 10px;
+}
+#divColor2 {
+  border-radius: 0 10px 10px 0;
+}
+
+/* #divCompare {
+  background-color: bisque;
+  height: 6rem;
+  border-radius: 10px;
+  text-align: center;
+  color: white;
+  font-size: large;
+} */
+.progress {
+  height: 20px;
 }
