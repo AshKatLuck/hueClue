@@ -1,39 +1,15 @@
-.showColor {
+/* .showColor {
   width: 500px;
   height: 500px;
   background-color: aliceblue;
   color: blue;
-}
-
-/* #divCompare {
-  width: 200px;
-  height: 200px;
-  background-color: antiquewhite;
 } */
 
-/* #output {
-  position: relative;
+body {
+  height: 100vh;
+  width: 100vw;
 }
-#under {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  width: 500px;
-  height: 20px;
-  border: 2px solid black;
-  background-color: blue;
-}
-#over {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  max-width: 500px;
-  width: 250px;
-  height: 20px;
-  border: 2px solid black;
-  background-color: blueviolet;
-  transition: all 0.5s ease-in;
-} */
+
 /* newly added classes in test.html */
 .picked-color,
 #showColorDiv {
@@ -82,14 +58,45 @@
   border-radius: 0 10px 10px 0;
 }
 
-/* #divCompare {
-  background-color: bisque;
-  height: 6rem;
-  border-radius: 10px;
-  text-align: center;
-  color: white;
-  font-size: large;
-} */
 .progress {
   height: 20px;
+}
+
+/* Color spectrum */
+.color-spectrum {
+  width: 100%;
+  height: 100px;
+  /* Linear gradient from red to violet */
+  background: linear-gradient(
+    to left,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    indigo,
+    violet,
+    grey,
+    black
+  );
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+#rainbow,
+#d-rainbow {
+  display: block;
+}
+
+@media screen and (max-width: 767px) {
+  #rainbow,
+  #d-rainbow {
+    display: none; /* Hide the div on screens smaller than 768px */
+  }
 }
