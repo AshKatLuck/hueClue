@@ -39,6 +39,10 @@ const red2 = document.getElementById("red2")! as HTMLParagraphElement;
 const green2 = document.getElementById("green2")! as HTMLParagraphElement;
 const blue2 = document.getElementById("blue2")! as HTMLParagraphElement;
 
+const isRgb = document.getElementById("isRgb")! as HTMLInputElement;
+
+const alertDiv = document.getElementById("alert")! as HTMLDivElement;
+
 type ColorType = {
   name: string;
   color: string;
@@ -52,13 +56,22 @@ const initialColor: ColorType = {
 let color1: ColorType = initialColor;
 let color2: ColorType = initialColor;
 
+let colorNumber: number[];
+let colorNumber1: number[];
+let colorNumber2: number[];
+
 const getColor = async () => {
   if ("EyeDropper" in window) {
-    console.log("EyeDropper is available");
+    // console.log("EyeDropper is available");
+
+    let eyeDropper = new (window as any).EyeDropper();
+    const colorSelectionResult = await eyeDropper.open();
+    return colorSelectionResult.sRGBHex;
+  } else {
+    alertDiv.innerHTML = `<div class="alert alert-danger" role="alert">
+  EyeDropper is not available in this browser. Try this page in the latest chrome browser
+</div>`;
   }
-  let eyeDropper = new (window as any).EyeDropper();
-  const colorSelectionResult = await eyeDropper.open();
-  return colorSelectionResult.sRGBHex;
 };
 
 const getTextColor = (isDark: boolean) => {
@@ -76,9 +89,16 @@ const assignColor1 = async () => {
   color1Name.innerText = color1.name;
   color1Name.style.color = textColor;
   const rbgNumbers = splitRGB(color1.color);
-  red1.innerText = String(rbgNumbers[0]);
-  green1.innerText = String(rbgNumbers[1]);
-  blue1.innerText = String(rbgNumbers[2]);
+  colorNumber1 = [...rbgNumbers];
+  if (isRgb.checked) {
+    red1.innerText = String(rbgNumbers[0]);
+    green1.innerText = String(rbgNumbers[1]);
+    blue1.innerText = String(rbgNumbers[2]);
+  } else {
+    red1.innerText = String(Math.ceil((rbgNumbers[0] / 255) * 100)) + "%";
+    green1.innerText = String(Math.ceil((rbgNumbers[1] / 255) * 100)) + "%";
+    blue1.innerText = String(Math.ceil((rbgNumbers[2] / 255) * 100)) + "%";
+  }
 
   compare();
 };
@@ -92,9 +112,20 @@ const assignColor2 = async () => {
   // console.log(color1, color2);
   color2Name.style.color = textColor;
   const rbgNumbers = splitRGB(color2.color);
-  red2.innerText = String(rbgNumbers[0]);
-  green2.innerText = String(rbgNumbers[1]);
-  blue2.innerText = String(rbgNumbers[2]);
+  // red2.innerText = String(rbgNumbers[0]);
+  // green2.innerText = String(rbgNumbers[1]);
+  // blue2.innerText = String(rbgNumbers[2]);
+  colorNumber2 = [...rbgNumbers];
+  if (isRgb.checked) {
+    red2.innerText = String(rbgNumbers[0]);
+    green2.innerText = String(rbgNumbers[1]);
+    blue2.innerText = String(rbgNumbers[2]);
+  } else {
+    console.log(rbgNumbers);
+    red2.innerText = String(Math.ceil((rbgNumbers[0] / 255) * 100)) + "%";
+    green2.innerText = String(Math.ceil((rbgNumbers[1] / 255) * 100)) + "%";
+    blue2.innerText = String(Math.ceil((rbgNumbers[2] / 255) * 100)) + "%";
+  }
   compare();
 };
 
@@ -116,9 +147,16 @@ const singleColorCheck = async () => {
   pShowColor.style.color = textColor;
   showColorDiv.style.backgroundColor = closestColor.name;
   const rbgNumbers = splitRGB(closestColor.color);
-  red.innerText = String(rbgNumbers[0]);
-  green.innerText = String(rbgNumbers[1]);
-  blue.innerText = String(rbgNumbers[2]);
+  colorNumber = [...rbgNumbers];
+  if (isRgb.checked) {
+    red.innerText = String(rbgNumbers[0]);
+    green.innerText = String(rbgNumbers[1]);
+    blue.innerText = String(rbgNumbers[2]);
+  } else {
+    red.innerText = String(Math.ceil((rbgNumbers[0] / 255) * 100)) + "%";
+    green.innerText = String(Math.ceil((rbgNumbers[1] / 255) * 100)) + "%";
+    blue.innerText = String(Math.ceil((rbgNumbers[2] / 255) * 100)) + "%";
+  }
 };
 
 const compare = () => {
@@ -163,10 +201,59 @@ const resetColors = () => {
   blue2.innerText = "";
 };
 
+const changeRgb = () => {
+  console.log("isRGB checked", isRgb.checked);
+  if (isRgb.checked) {
+    red.innerText = red.innerText ? String(colorNumber[0]) : "";
+    red1.innerText = red1.innerText ? String(colorNumber1[0]) : "";
+    red2.innerText = red2.innerText ? String(colorNumber2[0]) : "";
+
+    green.innerText = green.innerText ? String(colorNumber[1]) : "";
+    green1.innerText = green1.innerText ? String(colorNumber1[1]) : "";
+    green2.innerText = green2.innerText ? String(colorNumber2[1]) : "";
+
+    blue.innerText = blue.innerText ? String(colorNumber[2]) : "";
+    blue1.innerText = blue1.innerText ? String(colorNumber1[2]) : "";
+    blue2.innerText = blue2.innerText ? String(colorNumber2[2]) : "";
+  } else {
+    red.innerText = red.innerText
+      ? String(Math.ceil((colorNumber[0] / 255) * 100)) + "%"
+      : "";
+    red1.innerText = red1.innerText
+      ? String(Math.ceil((colorNumber1[0] / 255) * 100)) + "%"
+      : "";
+    red2.innerText = red2.innerText
+      ? String(Math.ceil((colorNumber2[0] / 255) * 100)) + "%"
+      : "";
+
+    green.innerText = green.innerText
+      ? String(Math.ceil((colorNumber[1] / 255) * 100)) + "%"
+      : "";
+    green1.innerText = green1.innerText
+      ? String(Math.ceil((colorNumber1[1] / 255) * 100)) + "%"
+      : "";
+    green2.innerText = green2.innerText
+      ? String(Math.ceil((colorNumber2[1] / 255) * 100)) + "%"
+      : "";
+
+    blue.innerText = blue.innerText
+      ? String(Math.ceil((colorNumber[2] / 255) * 100)) + "%"
+      : "";
+    blue1.innerText = blue1.innerText
+      ? String(Math.ceil((colorNumber1[2] / 255) * 100)) + "%"
+      : "";
+    blue2.innerText = blue2.innerText
+      ? String(Math.ceil((colorNumber2[2] / 255) * 100)) + "%"
+      : "";
+  }
+};
+
 btnCheckColorName.addEventListener("click", singleColorCheck);
 btnColor1.addEventListener("click", assignColor1);
 btnColor2.addEventListener("click", assignColor2);
 btnResetColor.addEventListener("click", resetColor);
 btnResetColors.addEventListener("click", resetColors);
+
+isRgb.addEventListener("change", changeRgb);
 
 console.log(cf.closest("#00FF88"));
